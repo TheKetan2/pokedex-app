@@ -58,7 +58,7 @@ export default class Pokedex extends Component {
     };
     return (
       <div className="Pokedex">
-        <h1>Pokedex</h1>
+        <h2>Pokedex</h2>
         <p>Score: {this.props.exp}</p>
         {this.props.isWinner ? (
           <div
