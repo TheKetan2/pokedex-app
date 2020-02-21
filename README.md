@@ -1,3 +1,3 @@
 ### Pokemon Card Game App
 
-[Screencasrt](screen/screen.gif)
+![alt text](screen/screen.gif)
