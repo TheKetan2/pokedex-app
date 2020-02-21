@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Pokecard from "./Pokecard";
-import "./Pokedex.css";
+import Pokedex from "./Pokedex";
 
-export default class Pokedex extends Component {
+export default class Pokegame extends Component {
   render() {
     const PokeData = {
       pokemon: [
@@ -56,34 +55,23 @@ export default class Pokedex extends Component {
         }
       ]
     };
+
+    let hand1 = [];
+    let hand2 = [...PokeData.pokemon];
+
+    while (hand1.length < hand2.length) {
+      let randIdx = Math.floor(Math.random() * hand2.length);
+      let randPokemon = hand2.splice(randIdx, 1)[0];
+      hand1.push(randPokemon);
+    }
+
+    let exp1 = hand1.reduce((exp, pokemon) => exp + pokemon.base_experience, 0);
+    let exp2 = hand2.reduce((exp, pokemon) => exp + pokemon.base_experience, 0);
+
     return (
-      <div className="Pokedex">
-        <h1>Pokedex</h1>
-        <p>Score: {this.props.exp}</p>
-        {this.props.isWinner ? (
-          <div
-            style={{
-              color: "green",
-              border: "2px solid green"
-            }}
-          >
-            <p>Yay! I won :D</p>
-          </div>
-        ) : (
-          <div style={{ color: "red", border: "2px solid red" }}>
-            <p>Dammit!</p>
-          </div>
-        )}
-        <div className="Pokedex-cards">
-          {this.props.pokemon.map(data => (
-            <Pokecard
-              id={data.id}
-              name={data.name}
-              type={data.type}
-              exp={data.base_experience}
-            />
-          ))}
-        </div>
+      <div>
+        <Pokedex pokemon={hand1} exp={exp1} isWinner={exp1 > exp2} />
+        <Pokedex pokemon={hand2} exp={exp2} isWinner={exp1 < exp2} />
       </div>
     );
   }
